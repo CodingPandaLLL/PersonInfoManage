@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "人员列表";
+}
+<div style="height:90px"></div>
+<div>
+    <script src="https://libs.baidu.com/jquery/1.7.1/jquery.min.js"></script>
+
+    <script>
+        var tempData = {};
+        var clickedId = "";
+        //tempData ==@ViewBag.DetailSource;
+        var data = JSON.parse('@Html.Raw(ViewBag.list)');
+        window.onload = function () {
+            console.log("初始化页面触发js函数:我是页面加载完打印的");
+            //调用页面赋值函数
+            test();
+
+
+            //以jquery为例实现点击某行获得某个td的数据
+            $("#datas tr").click(function () {
+                //给每行绑定了一个点击事件
+                var td = $( this ).find( "td" );//this指向了当前点击的行，通过find我们获得了该行所有的td对象
+                //题中说到某个td，为了演示所以我们假设是要获得第1个td的数据
+                clickedId = td.eq(0).html();//通过eq可以得到具体的某个td对象，从而得到相应的数据
+                debugger;
+                var btn1 = document.getElementById('btn');
+                btn1.style.display=''
+             });
+
+            ////行点击事件
+            //var trs = document.getElementsByTagName('tr');
+            //for (let j = 0; j < trs.length; j++) {
+            //    trs[j].onclick = function () {
+
+            //        //var myname=prompt("请输入你的姓名:");
+            //        //if (myname != null) { alert("你好" + myname); }
+            //        //else { alert("你好 my friend.") }
+            //        //confirm('确定要执行此操作吗?');
+            //        //alert(this.getAttribute("tid"));
+            //        debugger;
+            //        //var tds=trs[j].getElementsByTagName("td");
+            //       //var tds＝tds.getElementsByTagName("td");
+            //        //var index=$('#table tr').eq(j);
+            //        //alert('id='+index.find('td').eq(1).text());
+
+
+            //    }
+
+            //}
+        }
+        function test() {
+            $.each(data, function (i, n) {
+                var row = $("#template").clone();
+                row.find("#ID").text(n.ID);
+                row.find("#EMAIL").text(n.EMAIL);
+                row.find("#HIGH").text(n.IMAGE);
+                row.find("#NAME").text(n.NAME);
+                row.find("#PHONE").text(n.PHONE);
+                row.find("#SEX").text(n.SEX);
+                row.find("#WEIGHT").text(n.WEIGHT);
+                row.find("#WORKOR").text(n.WORKOR);
+                row.find("#ADDRESS").text(n.ADDRESS);
+                row.appendTo("#datas");//添加到模板的容器中
+            });
+        }
+        function add() {
+            window.location.href = "..\\Person\\GotoAddPerson";
+        }
+
+        function PersonDelete() {
+
+            var trueOrFalse = confirm('确定要删除序号为' + clickedId + '的这条数据吗?');
+            debugger;
+            if (trueOrFalse) {
+                var para = {};
+                para.ID = clickedId;
+                $.ajax({
+                    type: "post",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify(para),
+                    url: '@Url.Content("~/Person/PersonDelete")',
+                    success: function (res) {
+                        if (res.result == "0" && (res.message != "" && res.message != undefined)) {
+                            alert(res.message);
+                        }
+                        else {
+                            alert("删除成功！");
+                            window.location.href = "..\\Person\\PersonList";
+                            var btn1 = document.getElementById('btn');
+                            btn1.style.display=''
+                        }
+                    }
+                });
+           } else {
+                var btn1 = document.getElementById('btn');
+                btn1.style.display=''
+           }
+        }
+       function PersonEdit() {
+           window.location.href = "..\\Person\\GotoEditPerson?id=" + clickedId;
+           //var trueOrFalse = confirm('确定要编辑序号为' + clickedId + '的这条数据吗?');
+           //if (trueOrFalse) {
+           //    debugger;
+           //} else {
+           //     var btn1 = document.getElementById('btn');
+           //     btn1.style.display=''
+           //}
+        }
+        function CloseDialog() {
+           var btn1 = document.getElementById('btn');
+           btn1.style.display='none'
+        }
+    </script>
+    <button onclick="add()">新增</button>
+    <table class="table table-striped" id="datas">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <caption align="top">人员信息表</caption>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>身高</th>
+                <th>体重</th>
+                <th>工作</th>
+                <th>电话</th>
+                <th>邮件</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr id="template">
+                <td id="ID"></td>
+                <td id="NAME"></td>
+                <td id="SEX"></td>
+                <td id="HIGH"></td>
+                <td id="WEIGHT"></td>
+                <td id="WORKOR"></td>
+                <td id="PHONE"></td>
+                <td id="EMAIL"></td>
+                <td id="ADDRESS"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div id="btn" style="display:none">
+        <label>请选择操作</label><br />
+        <button id="edit" onclick="PersonEdit()">编辑</button>
+        <button id="delete" onclick="PersonDelete()">删除</button>
+        <button id="closeDialog" onclick="CloseDialog()">取消</button>
+</div>
+

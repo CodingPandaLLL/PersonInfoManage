@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "编辑人员";
+}
+<div style="height:90px"></div>
+<div>
+    <script>
+        function AddPerson() {
+        var para = {};
+        para.EMAIL = document.indexForm.EMAIL.value;
+        para.HIGH = document.indexForm.HIGH.value;
+        para.NAME = document.indexForm.NAME.value;
+        para.PHONE = document.indexForm.PHONE.value;
+        para.SEX = document.indexForm.SEX.value;
+        para.WEIGHT = document.indexForm.WEIGHT.value;
+        para.WORKOR = document.indexForm.WORKOR.value;
+        para.ADDRESS = document.indexForm.ADDRESS.value;
+        para.ID=@ViewBag.DetailSource.ID;
+            debugger;              
+        $.ajax({
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(para),
+            url: '@Url.Content("~/Person/EditPerson")',
+            success: function (res) {
+                if (res.Result == "1") {
+                    alert(res.Message);
+                    window.location.href = "..\\Person\\PersonList";
+                    //window.location.href = "..\\Home\\UserInfo?id=" + res.Result;
+
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        });
+    }
+
+    </script>
+    <form name="indexForm">
+        <h3>编辑个人信息</h3><br /><br /><br />
+        邮箱：<input id="EMAIL" type="text" value=@ViewBag.DetailSource.EMAIL /><br /><br /><br />
+        身高：<input id="HIGH" type="text" value=@ViewBag.DetailSource.HIGH /><br /><br /><br />
+        姓名：<input id="NAME" type="text" value=@ViewBag.DetailSource.NAME /><br /><br /><br />
+        电话：<input id="PHONE" type="text" value=@ViewBag.DetailSource.PHONE /><br /><br /><br />
+        性别：<input id="SEX" type="text" value=@ViewBag.DetailSource.SEX /><br /><br /><br />
+        体重：<input id="WEIGHT" type="text" value=@ViewBag.DetailSource.WEIGHT /><br /><br /><br />
+        职业：<input id="WORKOR" type="text" value=@ViewBag.DetailSource.WORKOR /><br /><br /><br />
+        地址：<input id="ADDRESS" type="text" value=@ViewBag.DetailSource.ADDRESS ><br /><br /><br />
+        @*账号：<input id="fname" type="text" value=@ViewBag.DetailSource./><br /><br /><br />*@
+        <input id="add" type="button" value="保存" onclick="AddPerson()" />
+    </form>
+</div>

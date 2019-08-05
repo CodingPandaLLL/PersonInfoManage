@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="height:90px"></div>
+<div id="unAuthorize" class="tab-pane">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <form class="form-horizontal">
+                <label class="col-xs-12 col-sm-1 control-label no-padding-right">卡号：</label>
+                <div class="col-xs-12 col-sm-1">
+                    <input id="txtPendingCardID" type="text" class="col-xs-12 col-sm-12" />
+                </div>
+                <label class="col-xs-12 col-sm-1 control-label no-padding-right">姓名：</label>
+                <div class="col-xs-12 col-sm-1">
+                    <input type="text" id="txtPendingName" class="col-xs-12 col-sm-12" />
+                </div>
+                <label class="col-xs-12 col-sm-1 control-label no-padding-right">单位：</label>
+                <div class="col-xs-12 col-sm-1">
+                    <input type="text" id="txtPendingCompany" class="col-xs-12 col-sm-12" />
+                </div>
+                <label class="col-xs-12 col-sm-1 control-label no-padding-right">人员类别：</label>
+                <div class="col-xs-12 col-sm-1">
+                    <select id="selPendingType" class="form-control col-xs-12 col-sm-12" editable="false">
+                        <option value="0">全部</option>
+                        @*@{
+                            if (ViewBag.Types != null && ViewBag.Types.Count != 0)
+                            {
+                                foreach (var type in ViewBag.Types)
+                                {
+                                    <option value="@type.Key">@type.Value</option>
+                                }
+                            }
+                        }*@
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-1">
+                    <a class="btn btn-sm btn-info" href="#" role="button" id="queryPendingBtn">查询</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @*<script>
+        function login() {
+            var pas = document.indexForm.lname.value;
+            var name = document.indexForm.fname.value;
+            var para = {};
+            para.name = name;
+            para.password = pas;
+
+            $.ajax({
+                type: "post",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify(para),
+                url: '@Url.Content("~/Home/Login")',
+                success: function (res) {
+                    debugger;
+                    if (res.Result == "1") {
+                        alert(res.Message);
+                        window.location.href = "..\\home\\UserInfo?id="+res.Result;
+                    }
+                    else {
+                        alert(res.Message);
+                    }
+                }
+            });
+        }
+
+        </script>*@
+</div>

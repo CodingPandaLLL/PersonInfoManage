@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div style="height:90px"></div>
+<div id="myCarousel">
+    <form name="indexForm">
+        <h3>登录</h3><br /><br /><br />
+        账号：<input id="fname" type="text" /><br /><br /><br />
+        密码：<input id="lname" type="password" /><br /><br /><br />
+        <input id="Button1" type="button" value="登录" onclick="login()" />
+    </form>
+
+    <script>
+    function login() {
+        var pas = document.indexForm.lname.value;
+        var name = document.indexForm.fname.value;
+        var para = {};
+        para.name = name;
+        para.password = pas;
+
+        $.ajax({
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(para),
+            url: '@Url.Content("~/Home/Login")',
+            success: function (res) {
+                debugger;
+                if (res.Result == "1") {
+                    alert(res.Message);
+                    window.location.href = "..\\Person\\PersonList";
+                    //window.location.href = "..\\Home\\UserInfo?id=" + res.Result;
+
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        });
+    }
+
+    </script>
+</div>

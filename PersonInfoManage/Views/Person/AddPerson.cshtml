@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "新增人员";
+}
+<div style="height:90px"></div>
+<div>
+    <script>
+        function AddPerson() {
+        var para = {};
+        para.EMAIL = document.indexForm.EMAIL.value;
+        para.HIGH = document.indexForm.HIGH.value;
+        para.NAME = document.indexForm.NAME.value;
+        para.PHONE = document.indexForm.PHONE.value;
+        para.SEX = document.indexForm.SEX.value;
+        para.WEIGHT = document.indexForm.WEIGHT.value;
+        para.WORKOR = document.indexForm.WORKOR.value;
+        para.ADDRESS = document.indexForm.ADDRESS.value;
+                       
+        $.ajax({
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(para),
+            url: '@Url.Content("~/Person/AddPerson")',
+            success: function (res) {
+                if (res.Result == "1") {
+                    alert(res.Message);
+                    window.location.href = "..\\Person\\PersonList";
+                    //window.location.href = "..\\Home\\UserInfo?id=" + res.Result;
+
+                }
+                else {
+                    alert(res.Message);
+                }
+            }
+        });
+    }
+
+    </script>
+    <form name="indexForm">
+        <h3>新增个人信息</h3><br /><br /><br />
+        邮箱：<input id="EMAIL" type="text" /><br /><br /><br />
+        身高：<input id="HIGH" type="text" /><br /><br /><br />
+        姓名：<input id="NAME" type="text" /><br /><br /><br />
+        电话：<input id="PHONE" type="text" /><br /><br /><br />
+        性别：<input id="SEX" type="text" /><br /><br /><br />
+        体重：<input id="WEIGHT" type="text" /><br /><br /><br />
+        职业：<input id="WORKOR" type="text" /><br /><br /><br />
+        地址：<input id="ADDRESS" type="text" /><br /><br /><br />
+        @*账号：<input id="fname" type="text" /><br /><br /><br />*@
+        <input id="add" type="button" value="保存" onclick="AddPerson()" />
+    </form>
+</div>
