@@ -1,13 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "主页";
 }
 <div style="height:90px"></div>
 <div id="myCarousel">
     <form name="indexForm">
         <h3>登录</h3><br /><br /><br />
-        账号：<input id="fname" type="text" /><br /><br /><br />
-        密码：<input id="lname" type="password" /><br /><br /><br />
-        <input id="Button1" type="button" value="登录" onclick="login()" />
+        <div>
+            <label for="exampleInputEmail1">账号：</label>
+            <input class="form-control" id="fname" type="text" placeholder="请输入账号" /><br /><br /><br />
+        </div>
+        <div>
+            <label for="exampleInputEmail1">密码：</label>
+            <input class="form-control" id="lname" type="password" placeholder="请输入密码" /><br /><br /><br />
+        </div>
+        <input id="Button1" class="btn btn-default"  value="登录" onclick="login()" />
     </form>
 
     <script>

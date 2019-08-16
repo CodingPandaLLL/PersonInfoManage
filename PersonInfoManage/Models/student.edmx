@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="studentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="studentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="person">
           <Key>
             <PropertyRef Name="ID" />
@@ -15,10 +15,19 @@
           <Property Name="HIGH" Type="nvarchar" MaxLength="50" />
           <Property Name="WEIGHT" Type="nvarchar" MaxLength="50" />
           <Property Name="WORKOR" Type="nvarchar" MaxLength="50" />
-          <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMAGE" Type="nvarchar" MaxLength="255" />
           <Property Name="PHONE" Type="nvarchar" MaxLength="50" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
           <Property Name="ADDRESS" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="syspic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMG_TYPE" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMG_PATH" Type="nvarchar" MaxLength="255" />
+          <Property Name="IMG_NAME" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -30,10 +39,10 @@
         </EntityType>
         <EntityContainer Name="studentModelStoreContainer">
           <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="syspic" EntityType="Self.syspic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="studentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -47,7 +56,7 @@
           <Property Name="HIGH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WEIGHT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WORKOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -63,7 +72,17 @@
         <EntityContainer Name="studentsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="person" EntityType="Self.person" />
           <EntitySet Name="user" EntityType="Self.user" />
+          <EntitySet Name="syspic" EntityType="studentModel.syspic" />
         </EntityContainer>
+        <EntityType Name="syspic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMG_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMG_PATH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IMG_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -92,6 +111,16 @@
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="syspic">
+            <EntityTypeMapping TypeName="studentModel.syspic">
+              <MappingFragment StoreEntitySet="syspic">
+                <ScalarProperty Name="IMG_NAME" ColumnName="IMG_NAME" />
+                <ScalarProperty Name="IMG_PATH" ColumnName="IMG_PATH" />
+                <ScalarProperty Name="IMG_TYPE" ColumnName="IMG_TYPE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

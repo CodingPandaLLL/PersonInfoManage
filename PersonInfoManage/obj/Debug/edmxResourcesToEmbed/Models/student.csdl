@@ -10,7 +10,7 @@
     <Property Name="HIGH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="WEIGHT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="WORKOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMAGE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ADDRESS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -26,5 +26,15 @@
   <EntityContainer Name="studentsEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="person" EntityType="Self.person" />
     <EntitySet Name="user" EntityType="Self.user" />
+    <EntitySet Name="syspic" EntityType="studentModel.syspic" />
   </EntityContainer>
+  <EntityType Name="syspic">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IMG_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IMG_PATH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IMG_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

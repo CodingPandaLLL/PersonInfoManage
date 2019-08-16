@@ -14,7 +14,7 @@
         para.WEIGHT = document.indexForm.WEIGHT.value;
         para.WORKOR = document.indexForm.WORKOR.value;
         para.ADDRESS = document.indexForm.ADDRESS.value;
-                       
+        para.IMAGE = document.indexForm.IMAGE.src;
         $.ajax({
             type: "post",
             contentType: "application/json; charset=utf-8",
@@ -33,7 +33,40 @@
                 }
             }
         });
-    }
+        }
+
+
+        function ImgUpload() {
+
+            var formData = new FormData();
+            formData.append('image', $('#imgUpload')[0].files[0]);
+            if ($('#imgUpload').length > 0) {
+            //ajax请求
+            $.ajax({
+                        type: "post",
+                        url:  "/Images/UploadImage",
+                        data: formData,
+                        dataType: 'json',
+                        processData: false, // 告诉jQuery不要去处理发送的数据
+                        contentType: false, // 告诉jQuery不要去设置Content-Type请求头
+                        xhrFields:{withCredentials:true},
+                        async: true,    //默认是true：异步，false：同步。
+                        success: function (data) {
+
+                            //给images赋值
+                            var img = document.getElementById('IMAGE');
+                            img.src = data.imgurl;
+
+                            //清空上传控件（再次点击上传取消时报错）
+                            var imgUploadValue = document.getElementById('imgUpload');
+                            imgUploadValue.value = '';    
+                        },
+                    });
+
+            } 
+        }
+
+
 
     </script>
     <form name="indexForm">
@@ -46,7 +79,9 @@
         体重：<input id="WEIGHT" type="text" /><br /><br /><br />
         职业：<input id="WORKOR" type="text" /><br /><br /><br />
         地址：<input id="ADDRESS" type="text" /><br /><br /><br />
-        @*账号：<input id="fname" type="text" /><br /><br /><br />*@
-        <input id="add" type="button" value="保存" onclick="AddPerson()" />
+        图片上传:<input class="btn btn-default" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" type="file" onchange="ImgUpload()" id="imgUpload">
+        图片：<img id="IMAGE" src="" alt="无图" class="img-rounded"><br /><br /><br />
+        <input id="add" class="btn btn-info" type="button" value="保存" onclick="AddPerson()" />
+
     </form>
 </div>

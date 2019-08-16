@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -151,6 +152,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>student.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\syspic.cs">
+      <DependentUpon>student.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>student.tt</DependentUpon>

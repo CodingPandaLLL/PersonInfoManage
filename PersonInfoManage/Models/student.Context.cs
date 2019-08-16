@@ -27,5 +27,6 @@ namespace PersonInfoManage.Models
     
         public virtual DbSet<person> person { get; set; }
         public virtual DbSet<user> user { get; set; }
+        public virtual DbSet<syspic> syspic { get; set; }
     }
 }

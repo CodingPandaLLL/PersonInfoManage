@@ -8,7 +8,6 @@
     <script>
         var tempData = {};
         var clickedId = "";
-        //tempData ==@ViewBag.DetailSource;
         var data = JSON.parse('@Html.Raw(ViewBag.list)');
         window.onload = function () {
             console.log("初始化页面触发js函数:我是页面加载完打印的");
@@ -26,34 +25,13 @@
                 var btn1 = document.getElementById('btn');
                 btn1.style.display=''
              });
-
-            ////行点击事件
-            //var trs = document.getElementsByTagName('tr');
-            //for (let j = 0; j < trs.length; j++) {
-            //    trs[j].onclick = function () {
-
-            //        //var myname=prompt("请输入你的姓名:");
-            //        //if (myname != null) { alert("你好" + myname); }
-            //        //else { alert("你好 my friend.") }
-            //        //confirm('确定要执行此操作吗?');
-            //        //alert(this.getAttribute("tid"));
-            //        debugger;
-            //        //var tds=trs[j].getElementsByTagName("td");
-            //       //var tds＝tds.getElementsByTagName("td");
-            //        //var index=$('#table tr').eq(j);
-            //        //alert('id='+index.find('td').eq(1).text());
-
-
-            //    }
-
-            //}
         }
         function test() {
             $.each(data, function (i, n) {
                 var row = $("#template").clone();
                 row.find("#ID").text(n.ID);
                 row.find("#EMAIL").text(n.EMAIL);
-                row.find("#HIGH").text(n.IMAGE);
+                row.find("#HIGH").text(n.HIGH);
                 row.find("#NAME").text(n.NAME);
                 row.find("#PHONE").text(n.PHONE);
                 row.find("#SEX").text(n.SEX);
@@ -99,27 +77,20 @@
         }
        function PersonEdit() {
            window.location.href = "..\\Person\\GotoEditPerson?id=" + clickedId;
-           //var trueOrFalse = confirm('确定要编辑序号为' + clickedId + '的这条数据吗?');
-           //if (trueOrFalse) {
-           //    debugger;
-           //} else {
-           //     var btn1 = document.getElementById('btn');
-           //     btn1.style.display=''
-           //}
         }
         function CloseDialog() {
            var btn1 = document.getElementById('btn');
            btn1.style.display='none'
         }
     </script>
-    <button onclick="add()">新增</button>
+    <button class="btn btn-default" onclick="add()">新增</button>
     <table class="table table-striped" id="datas">
         <colgroup>
             <col width="150">
             <col width="200">
             <col>
         </colgroup>
-        <caption align="top">人员信息表</caption>
+        <caption align="top"><strong>人员信息表</strong></caption>
         <thead>
             <tr>
                 <th>序号</th>
@@ -147,11 +118,30 @@
             </tr>
         </tbody>
     </table>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+                <a href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 <div id="btn" style="display:none">
-        <label>请选择操作</label><br />
-        <button id="edit" onclick="PersonEdit()">编辑</button>
-        <button id="delete" onclick="PersonDelete()">删除</button>
-        <button id="closeDialog" onclick="CloseDialog()">取消</button>
+    <label>请选择操作</label><br />
+    <button id="edit" onclick="PersonEdit()">编辑</button>
+    <button id="delete" onclick="PersonDelete()">删除</button>
+    <button id="closeDialog" onclick="CloseDialog()">取消</button>
 </div>
 

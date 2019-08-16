@@ -10,10 +10,19 @@
     <Property Name="HIGH" Type="nvarchar" MaxLength="50" />
     <Property Name="WEIGHT" Type="nvarchar" MaxLength="50" />
     <Property Name="WORKOR" Type="nvarchar" MaxLength="50" />
-    <Property Name="IMAGE" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMAGE" Type="nvarchar" MaxLength="255" />
     <Property Name="PHONE" Type="nvarchar" MaxLength="50" />
     <Property Name="EMAIL" Type="nvarchar" MaxLength="50" />
     <Property Name="ADDRESS" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="syspic">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IMG_TYPE" Type="nvarchar" MaxLength="50" />
+    <Property Name="IMG_PATH" Type="nvarchar" MaxLength="255" />
+    <Property Name="IMG_NAME" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -25,6 +34,7 @@
   </EntityType>
   <EntityContainer Name="studentModelStoreContainer">
     <EntitySet Name="person" EntityType="Self.person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="syspic" EntityType="Self.syspic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>
