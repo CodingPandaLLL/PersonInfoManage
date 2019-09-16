@@ -16,11 +16,15 @@ using System.Data.Entity;
 using System.Drawing;
 using System.Net.Http;
 using System.Net;
+using System.Data.SqlClient;
+using Redis;
+using Microsoft.AspNetCore.Identity;
 
 namespace ImagesController.Controllers
 {
     public class ImagesController : Controller
     {
+
         /// <summary>
         /// 上传图片
         /// </summary>
@@ -29,10 +33,28 @@ namespace ImagesController.Controllers
         [HttpPost]
         public ActionResult UploadImage()
         {
-            string path11 = "E:\\codeSpace\\c#\\PersonInfoManage\\PersonInfoManage\\Files\\Images\\SlideConfig\\";
+            //获取图片路径
+            string savePath = "";
+
+            studentsEntities studentsEntities = new studentsEntities();
+            var regResult = studentsEntities.register.SqlQuery("select * from register where NAME=@name", new SqlParameter("@name", "IMGPATH")).FirstOrDefault();
+            //打印
+            Console.Write("*");
+            //savePath = RedisHelper.Get<string>("imgPath");
+            if (regResult != null)
+            {
+                //从redis中获取路径
+                //RedisHelper.Set("imgPath", regResult.VALUE, DateTime.Parse("2019/12/03"));
+                //RedisHelper.Remove(key);
+
+                savePath = regResult.VALUE;
+                Console.WriteLine(regResult.VALUE);
+            }
+
             //接受参数
             HttpPostedFileBase fileBase = Request.Files["image"];
             string imgurl = string.Empty;
+            int imgId = 0;
             string imgPath = System.IO.Path.GetFileName(fileBase.FileName);
             int index = imgPath.LastIndexOf('.');
             string suffix = imgPath.Substring(index).ToLower();
@@ -41,14 +63,13 @@ namespace ImagesController.Controllers
             if (suffix == ".jpg" || suffix == ".jpeg" || suffix == ".png" || suffix == ".gif" || suffix == ".bmp")
             {
                 string pictureName = DateTime.Now.Ticks.ToString() + suffix; //图片名称
-                string savePath = path11;//幻灯片文件夹
+
                 if (!Directory.Exists(savePath))
                 {
                     Directory.CreateDirectory(savePath);
                 }
 
                 //保存图片信息到数据库表
-                studentsEntities studentsEntities = new studentsEntities();
                 syspic pic = new syspic();
                 pic.IMG_NAME = pictureName;
                 pic.IMG_PATH = savePath;
@@ -59,6 +80,7 @@ namespace ImagesController.Controllers
                 studentsEntities.SaveChanges();
 
                 imgurl = "https://" + Request.Url.Authority + "/Files/Images/SlideConfig/" + pictureName;
+                imgId = pic.ID;
                 fileBase.SaveAs(savePath + pictureName);
             }
             else
@@ -67,7 +89,8 @@ namespace ImagesController.Controllers
             }
             var result = new
             {
-                imgurl = imgurl
+                imgurl = imgurl,
+                imgId = imgId
             };
             return Content(JsonConvert.SerializeObject(result));
         }

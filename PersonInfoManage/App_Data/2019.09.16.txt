@@ -1,0 +1,7 @@
+2019-09-16 16:23:01,495 线程ID:[1] 日志级别:[INFO ] : [AppStart]
+2019-09-16 16:23:01,523 线程ID:[1] 日志级别:[WARN ] : [Warning]
+2019-09-16 16:23:01,530 线程ID:[1] 日志级别:[ERROR] : [Error]
+2019-09-16 16:23:01,536 线程ID:[1] 日志级别:[FATAL] : [Fatal]
+2019-09-16 16:23:01,598 线程ID:[1] 日志级别:[ERROR] : [尝试除以零。]
+System.DivideByZeroException: 尝试除以零。
+   在 PersonInfoManage.MvcApplication.Application_Start() 位置 E:\codeSpace\c#\PersonInfoManage\PersonInfoManage\Global.asax.cs:行号 33
