@@ -1,0 +1,28 @@
+2020-04-07 13:37:02,045 线程ID:[1] 日志级别:[INFO ] : [AppStart]
+2020-04-07 13:37:02,092 线程ID:[1] 日志级别:[WARN ] : [Warning]
+2020-04-07 13:37:02,108 线程ID:[1] 日志级别:[ERROR] : [Error]
+2020-04-07 13:37:02,166 线程ID:[1] 日志级别:[FATAL] : [Fatal]
+2020-04-07 13:37:02,381 线程ID:[1] 日志级别:[ERROR] : [尝试除以零。]
+System.DivideByZeroException: 尝试除以零。
+   在 PersonInfoManage.MvcApplication.Application_Start() 位置 E:\codeSpace\c#\PersonInfoManage\PersonInfoManage\Global.asax.cs:行号 33
+2020-04-07 14:37:30,898 线程ID:[1] 日志级别:[INFO ] : [AppStart]
+2020-04-07 14:37:30,942 线程ID:[1] 日志级别:[WARN ] : [Warning]
+2020-04-07 14:37:30,970 线程ID:[1] 日志级别:[ERROR] : [Error]
+2020-04-07 14:37:30,983 线程ID:[1] 日志级别:[FATAL] : [Fatal]
+2020-04-07 14:37:31,027 线程ID:[1] 日志级别:[ERROR] : [尝试除以零。]
+System.DivideByZeroException: 尝试除以零。
+   在 PersonInfoManage.MvcApplication.Application_Start() 位置 E:\codeSpace\c#\PersonInfoManage\PersonInfoManage\Global.asax.cs:行号 33
+2020-04-07 15:19:58,604 线程ID:[34] 日志级别:[INFO ] : [AppStart]
+2020-04-07 15:19:58,637 线程ID:[34] 日志级别:[WARN ] : [Warning]
+2020-04-07 15:19:58,654 线程ID:[34] 日志级别:[ERROR] : [Error]
+2020-04-07 15:19:58,669 线程ID:[34] 日志级别:[FATAL] : [Fatal]
+2020-04-07 15:19:58,731 线程ID:[34] 日志级别:[ERROR] : [尝试除以零。]
+System.DivideByZeroException: 尝试除以零。
+   在 PersonInfoManage.MvcApplication.Application_Start() 位置 E:\codeSpace\c#\PersonInfoManage\PersonInfoManage\Global.asax.cs:行号 33
+2020-04-07 15:52:58,971 线程ID:[20] 日志级别:[INFO ] : [AppStart]
+2020-04-07 15:52:58,992 线程ID:[20] 日志级别:[WARN ] : [Warning]
+2020-04-07 15:52:59,004 线程ID:[20] 日志级别:[ERROR] : [Error]
+2020-04-07 15:52:59,045 线程ID:[20] 日志级别:[FATAL] : [Fatal]
+2020-04-07 15:52:59,098 线程ID:[20] 日志级别:[ERROR] : [尝试除以零。]
+System.DivideByZeroException: 尝试除以零。
+   在 PersonInfoManage.MvcApplication.Application_Start() 位置 E:\codeSpace\c#\PersonInfoManage\PersonInfoManage\Global.asax.cs:行号 33
